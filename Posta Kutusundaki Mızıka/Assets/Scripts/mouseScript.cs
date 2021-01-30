@@ -18,7 +18,7 @@ public class mouseScript : MonoBehaviour
    
     void Update()
     {
-        Cursor.SetCursor(cursorTexture, hotSpot, mode);
+        //Cursor.SetCursor(cursorTexture, hotSpot, mode);
 
         if (Input.GetMouseButtonDown(1))
         {

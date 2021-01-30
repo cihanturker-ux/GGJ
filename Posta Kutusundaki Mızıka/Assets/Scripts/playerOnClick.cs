@@ -11,95 +11,102 @@ public class playerOnClick : MonoBehaviour
     public float maxSpeed = 5f;
     public float turnSpeed = 15f;
 
-    private Animator anim;
-    private CharacterController Controller;
+   // private Animator anim;
+   // private CharacterController Controller;
     private CollisionFlags collisionFlags = CollisionFlags.None;
     
     private Vector3 playerMove = Vector3.zero;
     private Vector3 targetMovePoint = Vector3.zero;
     
-    private float currentSpeed;
+    
     private float playerToPointDistence;
-    private float gravity = 9.8f;
-    private float height;
+    
+  
 
     private bool canMove;
     private bool finishedMovement = true;
     private Vector3 newMovePoint;
-
+    private Vector3 walkingPoint;
+    private bool onDistance = false;
+    private float journeyLength;
     private void Awake()
     {
-        anim = GetComponent<Animator>();
-        Controller = GetComponent<CharacterController>();
-        currentSpeed = maxSpeed;
+      //  anim = GetComponent<Animator>();
+    
+        
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
-       CalculateHeight();
-       CheckIfFinishedMovement();
-       
+     
+      
+        MovePlayer();
+        isOnDistance();
     }
-    bool isGrounded()
-    {
-        return collisionFlags == CollisionFlags.CollidedBelow ? true : false;
-    }
+   
 
-    void CalculateHeight()
+   
+    void isOnDistance()
     {
-        if (isGrounded())
-        {
-            height = 0f;
-        }
-        else
-        {
-            height -= gravity * Time.deltaTime;
-        }
-    }
 
-    void CheckIfFinishedMovement()
-    {
-        if (!finishedMovement)
+        if(journeyLength > 0.5f)
         {
-            if (!anim.IsInTransition(0) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") &&
-                anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.8f)
-            {
-                finishedMovement = true;
-            }
+            transform.position = Vector3.Lerp(transform.position, walkingPoint, Time.fixedDeltaTime * 0.5f);
         }
-        else
-        {
-            MovePlayer();
-            playerMove.y = height * Time.deltaTime;
-            collisionFlags = Controller.Move(playerMove);
-        }
+        
+            
+        
+        
     }
+   
 
     void MovePlayer()
     {
         if (Input.GetMouseButtonDown(1))
         {
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
+
                 playerToPointDistence = Vector3.Distance(transform.position, hit.point);
                 if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
                 {
+
                     if (playerToPointDistence >= 1.0f)
                     {
+                        Debug.Log("Etap4");
                         canMove = true;
                         targetMovePoint = hit.point;
                     }
                 }
             }
         }
-
-        if (canMove)
+        else if (Input.GetMouseButtonDown(0))
         {
-            anim.SetFloat("Speed",1.0f);
-            
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                {
+                   
+                    
+                    walkingPoint =new Vector3(hit.point.x,transform.position.y,hit.point.z);
+                    journeyLength = Vector3.Distance(transform.position, walkingPoint);
+
+                   
+                   
+
+                }
+            }
+        }
+                if (canMove)
+        {
+            // anim.SetFloat("Speed",1.0f);
+          //  Debug.Log("Etap1");
             newMovePoint = new Vector3(targetMovePoint.x,transform.position.y,targetMovePoint.z);
 
             transform.rotation = Quaternion.Slerp(transform.rotation,Quaternion.LookRotation(newMovePoint - transform.position), turnSpeed * Time.deltaTime);
@@ -107,13 +114,11 @@ public class playerOnClick : MonoBehaviour
             playerMove = transform.forward * turnSpeed * Time.deltaTime;
             if (Vector3.Distance(transform.position, newMovePoint) <= 0.6f)
             {
+               // Debug.Log("Etap2");
                 canMove = false;
             }
         }
-        else
-        {
-            playerMove.Set(0f,0f,0f);
-            anim.SetFloat("Speed",0f);
-        }
+        
     }
+   
 }
