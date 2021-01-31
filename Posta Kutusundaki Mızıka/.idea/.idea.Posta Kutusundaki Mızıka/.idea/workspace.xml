@@ -10,11 +10,30 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UIMain/UIMain.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/3rdPerson+Fly/Scripts/PlayerScripts/AimBehaviourBasic.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/Assets/Scripts/playerOnClick.cs" />
+        <option value="$PROJECT_DIR$/Assets/3rdPerson+Fly/Scripts/PlayerScripts/AimBehaviourBasic.cs" />
+        <option value="$PROJECT_DIR$/Assets/Sercan/Scripts/AnimationController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Sercan/Scripts/Movement/Movement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Sercan/Scripts/InputController/InputController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Sercan/Scripts/Controllers/InputController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Sercan/Scripts/Movement/Mover.cs" />
+        <option value="$PROJECT_DIR$/Assets/Sercan/Scripts/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/CameraFollow.cs" />
         <option value="$PROJECT_DIR$/Assets/Sercan/Scripts/UIManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Sercan/Scripts/ObjectClick.cs" />
+        <option value="$PROJECT_DIR$/Assets/Sercan/Scripts/InteractableObjUI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Sercan/Scripts/ObjectInteraction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Sercan/Scripts/InteractableObjects/InteractableObjUI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Sercan/Scripts/InteractableObjects/ObjectStory.cs" />
+        <option value="$PROJECT_DIR$/Assets/Sercan/Scripts/InteractableObjects/ObjectInteraction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Sercan/Scripts/Controllers/AnimationController.cs" />
       </list>
     </option>
   </component>

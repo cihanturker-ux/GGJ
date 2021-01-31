@@ -22,20 +22,16 @@ public class CameraFollow : MonoBehaviour
     
     void Update()
     {
-        targetHeight = Player.position.y + followHeight;
+        RotateXAxis();
 
-        currentRotation = transform.eulerAngles.y;
+    }
 
-        currentHeight = Mathf.Lerp(transform.position.y, targetHeight, followHeight * Time.deltaTime);
+    void RotateXAxis()
+    {
+        float yAxis = Input.GetAxis("Mouse Y");
 
-        Quaternion euler = Quaternion.Euler(0f, currentRotation, 0f);
-
-        Vector3 targetPosition = Player.position - (euler * Vector3.forward) * followDistence;
-
-        targetPosition.y = currentHeight;
-
-        transform.position = targetPosition;
-        transform.LookAt(Player);
-
+        Vector3 rotation = transform.rotation.eulerAngles;
+        rotation.x -= yAxis;
+        transform.rotation = Quaternion.Euler(rotation);
     }
 }

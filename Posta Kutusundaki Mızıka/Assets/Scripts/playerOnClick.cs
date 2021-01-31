@@ -52,7 +52,7 @@ public class playerOnClick : MonoBehaviour
 
         if(journeyLength > 0.5f)
         {
-            transform.position = Vector3.Lerp(transform.position, walkingPoint, Time.fixedDeltaTime * 0.5f);
+            transform.position = Vector3.Lerp(transform.position, walkingPoint, Time.fixedDeltaTime * 1f);
         }
         
             
@@ -103,12 +103,13 @@ public class playerOnClick : MonoBehaviour
                 }
             }
         }
-                if (canMove)
+        if (canMove)
         {
             // anim.SetFloat("Speed",1.0f);
           //  Debug.Log("Etap1");
             newMovePoint = new Vector3(targetMovePoint.x,transform.position.y,targetMovePoint.z);
-
+            
+            
             transform.rotation = Quaternion.Slerp(transform.rotation,Quaternion.LookRotation(newMovePoint - transform.position), turnSpeed * Time.deltaTime);
 
             playerMove = transform.forward * turnSpeed * Time.deltaTime;
