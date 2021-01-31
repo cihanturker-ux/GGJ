@@ -3,8 +3,12 @@ using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour
 {
-    List<InventoryObject> inventoryObjects;
+   public List<InventoryObject> inventoryObjects;
 
+    private void Start()
+    {
+        
+    }
     public void Add(InventoryObject inventoryObject)
     {
         inventoryObjects.Add(inventoryObject);
@@ -18,5 +22,8 @@ public class Inventory : MonoBehaviour
 
 public enum InventoryObject
 {
+    bos,   
+    key1,
+    key2
 
 }

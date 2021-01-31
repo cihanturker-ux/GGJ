@@ -16,5 +16,7 @@ namespace Sercan.Scripts
             anim.SetFloat("Speed",v); 
         }
 
+      
+
     }
 }
