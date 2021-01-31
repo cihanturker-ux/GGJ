@@ -1,5 +1,6 @@
 ﻿using System;
 using Sercan.Scripts.InteractableObjects;
+using Sercan.Scripts.Managers;
 using UnityEngine;
 
 namespace Sercan.Scripts
@@ -13,6 +14,8 @@ namespace Sercan.Scripts
         private GameObject spawnObject;
         private InteractableObjUI uıManager;
         private PlayerController playerController;
+        private UIManager uı;
+        private GameManager gameManager;
         private Ray ray;
         private RaycastHit hit;
         private bool isMouseClick;
@@ -21,7 +24,9 @@ namespace Sercan.Scripts
         private void Start()
         {
             uıManager = FindObjectOfType<InteractableObjUI>();
+            uı = FindObjectOfType<UIManager>();
             playerController = FindObjectOfType<PlayerController>();
+            gameManager = FindObjectOfType<GameManager>();
             cam = Camera.main.transform;
             offset = transform.position - cam.transform.position;
         }
@@ -46,9 +51,9 @@ namespace Sercan.Scripts
 
         private void FixedUpdate()
         {
+            ChangeObject();
             if (isMouseClick)
             {
-                ChangeObject();
                 isMouseClick = false;
             }
         }
@@ -59,6 +64,10 @@ namespace Sercan.Scripts
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask) && !uıManager.InteractObjCanvas)
             {
+               
+                uı.CursorChanger(true);
+                if (!isMouseClick) return;
+                
                 playerController.enabled = false;
                 changedObject = hit.transform.gameObject;
                 
@@ -66,9 +75,14 @@ namespace Sercan.Scripts
                 uıManager.ObjectText(hit.transform.gameObject.GetComponent<ObjectStory>().story);
                 
                 spawnObject = Instantiate(changedObject, spawnPosition);
-                spawnObject.transform.localScale *= 150;
+                spawnObject.transform.localScale *= 5000;
+                spawnObject.transform.rotation = Quaternion.Euler(Vector3.left * 90);
                 Cursor.lockState = CursorLockMode.Confined;
                 
+            }
+            else
+            {
+                uı.CursorChanger(false);
             }
         }
 
@@ -81,6 +95,8 @@ namespace Sercan.Scripts
                 changedObject = null;
                 uıManager.InteractableObjectCanvas(false);
                 playerController.enabled = true;
+                
+                gameManager.FinalPanel();
             }
         }
 

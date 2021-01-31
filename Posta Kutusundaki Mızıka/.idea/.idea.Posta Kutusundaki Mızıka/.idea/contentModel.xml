@@ -39,12 +39,15 @@
               <e p="PlayerController.cs" t="Include" />
             </e>
             <e p="InteractableObjects" t="Include">
+              <e p="Dialogues.cs" t="Include" />
               <e p="InteractableObjUI.cs" t="Include" />
               <e p="ObjectInteraction.cs" t="Include" />
               <e p="ObjectStory.cs" t="Include" />
             </e>
             <e p="Managers" t="Include">
+              <e p="GameManager.cs" t="Include" />
               <e p="SoundManager.cs" t="Include" />
+              <e p="UIManager.cs" t="Include" />
             </e>
             <e p="Movement" t="Include">
               <e p="Mover.cs" t="Include" />

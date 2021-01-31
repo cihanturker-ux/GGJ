@@ -10,7 +10,7 @@ public class UIMain : MonoBehaviour
 
     public void StartGame()
     {
-        Application.LoadLevel("levelismi");
+        Application.LoadLevel("Game");
     }
     public void Settings()
     {

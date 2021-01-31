@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections;
 using Sercan.Scripts.Movement;
 using UnityEditor.Animations;
 using UnityEngine;
 using Sercan.Scripts.Controllers;
+using Sercan.Scripts.InteractableObjects;
+using Sercan.Scripts.Managers;
 
 namespace Sercan.Scripts
 {
@@ -10,12 +13,15 @@ namespace Sercan.Scripts
     {
         [SerializeField] private float moveSpeed;
         [Range(0, 10)] [SerializeField] private float senstivity;
+        [SerializeField] private Transform homeSpawnPos;
         
         private Rigidbody rb;
         private AnimationController anim;
         private Mover mover;
         private InputController input;
         private AudioSource audio;
+        private UIManager uı;
+        private SoundManager soundManager;
 
         private float horizontalMove;
         private float verticalMove;
@@ -34,6 +40,8 @@ namespace Sercan.Scripts
             mover = new Mover(rb,transform);
             input = new InputController();
             audio = GetComponent<AudioSource>();
+            uı = FindObjectOfType<UIManager>();
+            soundManager = FindObjectOfType<SoundManager>();
         }
 
         #endregion
@@ -70,7 +78,41 @@ namespace Sercan.Scripts
         {
             audio.Play();
         }
-        
-        
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.tag == "FamilyImage")
+            {
+                soundManager.ClipPlay(0);   
+                return;
+                
+            }
+            uı.DialoguePanel(true,other.GetComponent<Dialogues>().text);
+            if (other.tag == "Door")
+            {
+                soundManager.ClipPlay(0);
+            }
+            
+            
+            
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            uı.DialoguePanel(false,other.GetComponent<Dialogues>().text);
+            if (other.tag == "Door")
+            {
+                StartCoroutine(DoorFade());
+                transform.position = homeSpawnPos.position;
+            }
+
+        }
+
+        IEnumerator DoorFade()
+        {
+            uı.fadePanel.SetActive(true);
+            yield return new WaitForSeconds(1);
+            uı.fadePanel.SetActive(false);
+        }
     }
 }

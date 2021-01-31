@@ -6,7 +6,7 @@ namespace Sercan.Scripts.Managers
     public class SoundManager : MonoBehaviour
     {
         [SerializeField] private AudioClip[] clips;
-
+        
         private AudioSource audioSource;
 
         private void Awake()
@@ -19,5 +19,7 @@ namespace Sercan.Scripts.Managers
             audioSource.clip = clips[index];
             audioSource.Play();
         }
+
+        
     }
 }
