@@ -34,6 +34,8 @@
         <option value="$PROJECT_DIR$/Assets/Sercan/Scripts/InteractableObjects/ObjectStory.cs" />
         <option value="$PROJECT_DIR$/Assets/Sercan/Scripts/InteractableObjects/ObjectInteraction.cs" />
         <option value="$PROJECT_DIR$/Assets/Sercan/Scripts/Controllers/AnimationController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Sercan/Scripts/Managers/SoundManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Sercan/Scripts/Controllers/PlayerController.cs" />
       </list>
     </option>
   </component>
@@ -79,6 +81,7 @@
       <option name="presentableId" value="Default" />
       <updated>1612005225355</updated>
       <workItem from="1612005321536" duration="5084000" />
+      <workItem from="1612085266203" duration="1090000" />
     </task>
     <servers />
   </component>

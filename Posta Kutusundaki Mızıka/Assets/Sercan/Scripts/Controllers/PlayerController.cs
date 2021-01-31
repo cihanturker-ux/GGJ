@@ -15,6 +15,7 @@ namespace Sercan.Scripts
         private AnimationController anim;
         private Mover mover;
         private InputController input;
+        private AudioSource audio;
 
         private float horizontalMove;
         private float verticalMove;
@@ -32,6 +33,7 @@ namespace Sercan.Scripts
             anim = new AnimationController(GetComponentInChildren<Animator>());
             mover = new Mover(rb,transform);
             input = new InputController();
+            audio = GetComponent<AudioSource>();
         }
 
         #endregion
@@ -40,6 +42,7 @@ namespace Sercan.Scripts
         {
             verticalMove = input.Vertical;
             horizontalMove = input.Horizontal;
+            
         }
 
         private void FixedUpdate()
@@ -51,6 +54,7 @@ namespace Sercan.Scripts
         {
             Rotater();
             anim.IdleToWalk(Mathf.Abs(verticalMove) + Mathf.Abs(horizontalMove));
+            
         }
 
         void Rotater()
@@ -60,6 +64,11 @@ namespace Sercan.Scripts
             Vector3 rotation = transform.rotation.eulerAngles;
             rotation.y += rotateAxis*senstivity;
             transform.rotation = Quaternion.Euler(rotation);
+        }
+
+        public void PlayWalkSound()
+        {
+            audio.Play();
         }
         
         
